@@ -55,6 +55,7 @@ func (d *Docker) PullImage() error {
 	return nil
 }
 
+// 运行容器
 func (d *Docker) RunContainer() (string, error) {
 	if id, err := d.CreateContainer(); err != nil {
 		return "", err
@@ -66,6 +67,7 @@ func (d *Docker) RunContainer() (string, error) {
 	}
 }
 
+// 启动容器
 func (d *Docker) StartContainer(id string) error {
 	ctx, cancel := context.WithTimeout(d.Context, DockerStartTimeout)
 	defer cancel()
@@ -75,6 +77,7 @@ func (d *Docker) StartContainer(id string) error {
 	return nil
 }
 
+// 创建容器
 func (d *Docker) CreateContainer() (string, error) {
 	config := &container.Config{
 		Image:     d.image, // 通过环境变量获取此次debug使用的image
@@ -101,6 +104,7 @@ func (d *Docker) CreateContainer() (string, error) {
 	return body.ID, err
 }
 
+// 清理容器
 func (d *Docker) CleanContainer(id string) {
 	ctx, cancel := context.WithTimeout(context.Background(), DockerDeleteTimeout)
 	defer cancel()
@@ -122,6 +126,7 @@ func (d *Docker) CleanContainer(id string) {
 	}
 }
 
+// 删除容器
 func (d *Docker) RmContainer(id string, force bool) error {
 	ctx, cancel := context.WithTimeout(context.Background(), DockerDeleteTimeout)
 	defer cancel()
