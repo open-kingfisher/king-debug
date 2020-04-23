@@ -1,8 +1,8 @@
 package main
 
 import (
-	"kingfisher/kf/common/log"
-	"kingfisher/king-debug/pkg"
+	"github.com/open-kingfisher/king-debug/pkg"
+	"github.com/open-kingfisher/king-utils/common/log"
 	"os"
 )
 
